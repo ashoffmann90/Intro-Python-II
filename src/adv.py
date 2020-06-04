@@ -39,10 +39,10 @@ room['treasure'].s_to = room['narrow']
 # Items
 
 items = {
-    'staff': Item('Staff', 'Lets you focus your magic.'),
-    'potion': Item('Potion', 'Restores health.'),
-    'meme': Item('Meme', 'You actually lost the game.'),
-    'light': Item('Phial of Galadriel', 'A light to you in dark places.')
+    'staff': Item('Staff', 'Lets you focus your magic. \nPickup with "get staff"'),
+    'potion': Item('Potion', 'Restores health. \nPickup with "get potion"'),
+    'meme': Item('Meme', 'You actually lost the game. \nPickup with "get meme"'),
+    'light': Item('Phial of Galadriel', 'A light to you in dark places. \nPickup with "get light"')
 }
 
 room['outside'].items.append(items['light'])
