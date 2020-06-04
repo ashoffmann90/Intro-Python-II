@@ -1,5 +1,6 @@
 from room import Room
 from player import Player
+from item import Item
 
 # Declare all the rooms
 
@@ -34,6 +35,21 @@ room['narrow'].w_to = room['foyer']
 room['narrow'].n_to = room['treasure']
 room['treasure'].s_to = room['narrow']
 
+
+# Items
+
+items = {
+    'staff': Item('Staff', 'Lets you focus your magic.\n Pickup item with "p"'),
+    'potion': Item('Potion', 'Restores health.\n Pickup item with "p"'),
+    'meme': Item('Meme', 'Restores or destroys faith in humanity.\n Pickup item with "p"'),
+    'light': Item('Phial of Galadriel', 'A light to you in dark places.\n Pickup item with "p"')
+}
+
+room['outside'].items.append(items['light'])
+room['foyer'].items.append(items['staff'])
+room['overlook'].items.append(items['potion'])
+room['treasure'].items.append(items['meme'])
+
 #
 # Main
 #
@@ -46,27 +62,51 @@ player = Player("Drew", room["outside"])
 #
 
 while True:
-    direction = input("Where you going n, e, s, w?")
-    if direction == "n":
-        if player.current_room == None:
-            continue
-        player.current_room = player.current_room.n_to
-    elif direction == "e":
-        if player.current_room == None:
-            continue
-        player.current_room = player.current_room.e_to
-    elif direction == "s":
-        if player.current_room == None:
-            continue
-        player.current_room = player.current_room.s_to
-    elif direction == "w":
-        if player.current_room == None:
-            continue
-        player.current_room = player.current_room.w_to
-    elif direction == 'q':
-        print("You've exited the game.")
-        break
-    print(player.current_room)
+    pInput = input('Where are you going? n, e, s, w?: \n')
+    player_input = pInput.lower().split(' ')
+
+    if len(player_input) == 1:
+        if pInput == 'n' or pInput == 's' or pInput == 'e' or pInput == 'w':
+            player.move(pInput)
+            print(
+                f'\n{player.name} is in the {player.current_room.name}\n{player.current_room.description}\n')
+        elif pInput == 'q':
+            print('You have exited the game.')
+            break
+        elif pInput == 'f':
+            player.current_room.search()
+        elif pInput == 'p':
+            player.grab_item()
+        else:
+            print('Not a valid command.')
+
+# LONG WAY, NOT DRY, MUST REMOVE DEF MOVE METHOD IN PLAYER.PY IF USING THIS WAY
+# while True:
+#     direction = input("Where are you going n, e, s, w?")
+#     if direction == "n":
+#         if player.current_room.n_to == None:
+#             print('There is nothing in that direction!')
+#             continue
+#         player.current_room = player.current_room.n_to
+#     elif direction == "e":
+#         if player.current_room.e_to == None:
+#             print('There is nothing in that direction!')
+#             continue
+#         player.current_room = player.current_room.e_to
+#     elif direction == "s":
+#         if player.current_room.s_to == None:
+#             print('There is nothing in that direction!')
+#             continue
+#         player.current_room = player.current_room.s_to
+#     elif direction == "w":
+#         if player.current_room.w_to == None:
+#             print('There is nothing in that direction!')
+#             continue
+#         player.current_room = player.current_room.w_to
+#     elif direction == 'q':
+#         print("You've exited the game.")
+#         break
+#     print(player.current_room)
 # * Prints the current room name
 # * Prints the current description (the textwrap module might be useful here).
 # * Waits for user input and decides what to do.
