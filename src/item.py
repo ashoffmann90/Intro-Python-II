@@ -4,7 +4,7 @@ class Item:
         self.description = description
 
     def pickup_item(self):
-        print(f'Picked up{self.name}')
+        print(f'Picked up: \n{self.name}')
 
     def drop_item(self):
-        print(f'Dropped {self.name}')
+        print(f'Dropped: \n{self.name}')

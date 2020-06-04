@@ -16,7 +16,7 @@ class Player:
         else:
             print("There is nothing in that Direction!")
 
-    def print_items(self):
+    def show_inventory(self):
         if not self.items:
             print('You are not carrying anything.')
         else:
@@ -24,11 +24,12 @@ class Player:
             for i in self.items:
                 print(i.name)
 
-    def grab_item(self, item):
+    def add_to_inventory(self, item):
         if len(self.current_room.items) > 0:
             self.items.append(item)
             self.current_room.items.remove(item)
-            print('You picked up {}')
+            item.pickup_item()
+            print('You picked up an item.')
         else:
             print(f'There are no items in this room.')
 
@@ -36,4 +37,8 @@ class Player:
         if len(self.items) > 0:
             self.items.remove(item)
             self.current_room.items.append(item)
-            item.drop()
+            print('You dropped an item.')
+            item.drop_item()
+
+    def show_controls(self):
+        print('Movement: \n n for north, \n s for south, \n e for east, \n w for west\n Interact: \n f to search a room, \n get or take to pick up an item, \n drop to drop an item, \n i to view your inventory, \n q to quit the game\n')
