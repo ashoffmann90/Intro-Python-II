@@ -41,4 +41,4 @@ class Player:
             item.drop_item()
 
     def show_controls(self):
-        print('Movement: \n n for north, \n s for south, \n e for east, \n w for west\n Interact: \n f to search a room, \n get or take to pick up an item, \n drop to drop an item, \n i to view your inventory, \n q to quit the game\n')
+        print('Movement: \n n for north, \n s for south, \n e for east, \n w for west\nInteract: \n f to search a room, \n get or take to pick up an item, \n drop to drop an item, \n i to view your inventory, \n q to quit the game\n')
